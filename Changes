@@ -1,0 +1,5 @@
+Revision history for Perl extension Linux::Capabilities.
+
+0.01  Thu Jul 24 08:08:22 2014
+	- original version; created by h2xs 1.23 with options
+		-A -n Linux::Capabilities
