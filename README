@@ -14,7 +14,9 @@ To install this module type the following:
 
 DEPENDENCIES
 
-This module requires libcap in order to build and work. In order to build you also need <sys/capability.h>.
+This module requires libcap in order to be build and work.
+Also, in order to build it, you need <sys/capability.h>, which is usually
+provided by the dev/devel package of your libcap.
 
 
 BUGS AND SUGGESTIONS
@@ -26,7 +28,8 @@ REPOSITORY
 COPYRIGHT AND LICENCE
 
 This code is under GPLv2.
-A proper copy of the license can be found in the LICENSE file located in the current directory.
+A proper copy of the license can be found in the LICENSE file located 
+in the current directory.
 
 Copyright (C) 2014 by Marian HackMan Marinov
 
