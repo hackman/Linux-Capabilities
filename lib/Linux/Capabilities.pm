@@ -38,24 +38,11 @@ XSLoader::load('Linux::Capabilities', $VERSION);
 # Preloaded methods go here.
 
 sub cap_get_proc {
-
-	my $ret = cap_get_proc_wrapper($_[0], $_[1]);
-	return 1 if ($ret == 0);
-	if ($ret == 1) {
-		print STDERR "Error: setns() The calling thread did not have the required privilege (CAP_SYS_ADMIN) for this operation\n";
-		return 0;
-	}
-	if ($ret == 9) {
-		print STDERR "Error: setns() fd is not a valid file descriptor\n";
-		return 0;
-	}
-	if ($ret == 12) {
-		print STDERR "Error: setns() Cannot allocate sufficient memory to change the specified namespace\n";
-		return 0;
-	}
-	if ($ret == 22) {
-		print STDERR "Error: setns() fd refers to a namespace whose type does not match that specified in nstype, or there is problem with reassociating the the thread with the specified namespace\n";
-		return 0;
+	my $ret = cap_get_proc_wrapper();
+	if ($ret eq 0) {
+		return 1;
+	} else {
+		return $ret;
 	}
 }
 
