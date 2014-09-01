@@ -9,13 +9,14 @@
 
 #include "ppport.h"
 
+#include <stdio.h>
 #include <errno.h>
 #include <sys/types.h>
 #include <sys/capability.h>
 
 MODULE = Linux::Capabilities		PACKAGE = Linux::Capabilities
 
-SV * cap_get_proc_wrapper(void)
+SV * cap_get_proc_wrapper()
 PPCODE:
 	cap_t caps;
 	int cap_len;
@@ -26,7 +27,8 @@ PPCODE:
 		XPUSHs(sv_2mortal(newSVnv(0)));
 	else {
 		cap_text = cap_to_text(caps, &cap_len);
-		if (cap_text) {
+		if (cap_free(caps) == -1)
+			fprintf(stderr, "Linux::Capabilities error: unable to free capability memory\n");
+		if (cap_text)
 			XPUSHs(sv_2mortal(newSVpv(cap_text, cap_len)));
-		}
 	}
