@@ -24,7 +24,7 @@ PPCODE:
 	ST(0) = sv_newmortal();
 	caps = cap_get_proc();
 	if (caps == NULL)
-		XPUSHs(sv_2mortal(newSVnv(0)));
+		XPUSHs(sv_2mortal(newSViv(0)));
 	else {
 		cap_text = cap_to_text(caps, &cap_len);
 		if (cap_free(caps) == -1)
