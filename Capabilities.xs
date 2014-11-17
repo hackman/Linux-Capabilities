@@ -45,11 +45,10 @@ PPCODE:
 		XPUSHs(sv_2mortal(newSViv(0)));
 	}
 
-SV * cap_get_bound_wrapper()
+SV * cap_get_bound_wrapper(int cap)
 PPCODE:
-	cap_value_t cap_val;
 	int ret = 0;
-	ret = cap_get_bound(cap_val);
+	ret = cap_get_bound((cap_value_t) cap);
 	if (ret == -1) {
 		fprintf(stderr, "Linux::Capabilities error: unable to get the bounding set\n");
 		XPUSHs(sv_2mortal(newSViv(-1)));

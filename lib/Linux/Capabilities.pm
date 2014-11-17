@@ -116,6 +116,15 @@ sub cap_get_pid {
 	}
 }
 
+sub cap_get_bound {
+	my $ret = cap_get_bound_wrapper($_[0]);
+	if ($ret == -1) {
+		return 0;
+	} else {
+		return $ret;
+	}
+}
+
 
 1;
 __END__
