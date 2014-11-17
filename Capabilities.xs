@@ -44,3 +44,15 @@ PPCODE:
 	} else {
 		XPUSHs(sv_2mortal(newSViv(0)));
 	}
+
+SV * cap_get_bound_wrapper()
+PPCODE:
+	cap_value_t cap_val;
+	int ret = 0;
+	ret = cap_get_bound(cap_val);
+	if (ret == -1) {
+		fprintf(stderr, "Linux::Capabilities error: unable to get the bounding set\n");
+		XPUSHs(sv_2mortal(newSViv(-1)));
+	} else {
+		XPUSHs(sv_2mortal(newSViv(ret)));
+	}
