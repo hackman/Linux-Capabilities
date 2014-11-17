@@ -80,6 +80,15 @@ XSLoader::load('Linux::Capabilities', $VERSION);
 
 # Preloaded methods go here.
 
+sub cap_is_supported {
+	my $ret = cap_is_supported_wrapper($_[0]);
+	if ($ret) {
+		return 1;
+	} else {
+		return 0;
+	}
+}
+
 sub cap_get_proc {
 	my $ret = cap_get_proc_wrapper();
 	if ($ret eq 0) {
