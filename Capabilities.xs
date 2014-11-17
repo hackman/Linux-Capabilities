@@ -32,3 +32,16 @@ PPCODE:
 		if (cap_text)
 			XPUSHs(sv_2mortal(newSVpv(cap_text, cap_len)));
 	}
+
+SV * cap_is_supported_wrapper(int cap)
+PPCODE:
+	if (cap < 0 || cap > CAP_LAST_CAP) {
+		fprintf(stderr, "Linux::Capabilities error: invalid capability supplied\n");
+		XPUSHs(sv_2mortal(newSViv(0)));
+	}
+	if (CAP_IS_SUPPORTED((cap_value_t) cap)) {
+		XPUSHs(sv_2mortal(newSViv(1)));
+	} else {
+		XPUSHs(sv_2mortal(newSViv(0)));
+	}
+
