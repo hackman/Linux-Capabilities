@@ -89,6 +89,14 @@ sub cap_is_supported {
 	}
 }
 
+sub cap_valid {
+	if ($_[0] < 0 || $_[0] > CAP_LAST_CAP) {
+		return 0;
+	} else {
+		return 1;
+	}
+}
+
 sub cap_get_proc {
 	my $ret = cap_get_proc_wrapper();
 	if ($ret eq 0) {
