@@ -44,4 +44,3 @@ PPCODE:
 	} else {
 		XPUSHs(sv_2mortal(newSViv(0)));
 	}
-
