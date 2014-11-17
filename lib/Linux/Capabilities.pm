@@ -23,6 +23,7 @@ our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 
 our @EXPORT = qw(
 	cap_valid
+	cap_get_pid
 	cap_get_proc
 	cap_set_proc
 	cap_get_bound
@@ -30,7 +31,7 @@ our @EXPORT = qw(
 	cap_is_supported
 );
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 use constant {
 # list all caps here
@@ -105,6 +106,16 @@ sub cap_get_proc {
 		return $ret;
 	}
 }
+
+sub cap_get_pid {
+	my $ret = cap_get_pid_wrapper($_[0]);
+	if ($ret eq 0) {
+		return 1
+	} else {
+		return $ret;
+	}
+}
+
 
 1;
 __END__
