@@ -56,3 +56,17 @@ PPCODE:
 	} else {
 		XPUSHs(sv_2mortal(newSViv(ret)));
 	}
+
+SV * cap_get_pid_wrapper(int pid)
+PPCODE:
+	int cap_len;
+	char *cap_text = NULL;
+	cap_t caps = cap_get_pid((pid_t) pid);
+	if (caps == NULL) {
+		fprintf(stderr, "Linux::Capabilities error: unable to capabilities for pid %d\n", pid);
+		XPUSHs(sv_2mortal(newSViv(0)));
+	} else {
+		cap_text = cap_to_text(caps, &cap_len);
+		if (cap_text)
+			XPUSHs(sv_2mortal(newSVpv(cap_text, cap_len)));
+	}
